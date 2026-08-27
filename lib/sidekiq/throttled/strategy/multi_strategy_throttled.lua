@@ -187,7 +187,7 @@ else
     elseif state.type == "threshold" then
       redis.call("LPUSH", state.key, state.now)
       redis.call("LTRIM", state.key, 0, state.lmt - 1)
-      redis.call("EXPIRE", state.key, state.ttl)
+      redis.call("PEXPIRE", state.key, math.ceil(state.ttl * 1000))
     end
   end
 end
