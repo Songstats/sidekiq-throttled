@@ -294,7 +294,7 @@ module Sidekiq
       def reschedule_throttled(work, target_queue, payload = Message.new(work.job))
         target_queue = target_queue.delete_prefix("queue:")
         message      = JSON.parse(work.job)
-        job_class    = message.fetch("wrapped") { message.fetch("class") { return false } }
+        job_class    = message.fetch("class") { return false }
         job_args     = message["args"]
         retry_args   = Array(payload.job_args)
 
