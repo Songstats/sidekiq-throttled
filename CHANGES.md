@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pipeline Web UI counter reads to avoid one Redis round trip per throttle.
 
 
+## [2.2.0] - 2026-07-20
+
+### Added
+
+- Allow jobs to combine multiple independent throttling strategies.
+
+
 ## [2.1.0] - 2026-01-20
 
 ### Fixed
