@@ -116,8 +116,6 @@ module Sidekiq
         return false if strategies.empty?
 
         strategy = select_strategy_for_requeue(strategies, message)
-        return false unless strategy
-
         strategy.requeue_throttled(work)
       end
 
@@ -162,7 +160,7 @@ module Sidekiq
           [cooldown, strategy]
         end
 
-        cooldowns.max_by { |cooldown, _strategy| cooldown }&.last
+        cooldowns.max_by { |cooldown, _strategy| cooldown }.last
       end
 
       def resolve_requeue_with(strategy, job_args)

@@ -183,8 +183,6 @@ module Sidekiq
 
         def update_throttled_strategy_options!
           keys = throttled_strategy_keys
-          return if keys.empty?
-
           opts = get_sidekiq_options.dup
           opts["throttled_strategy_keys"] = keys.map(&:to_s)
           opts.delete("throttled_strategy_key")

@@ -125,8 +125,8 @@ module Sidekiq
       end
 
       def dynamic?
-        return true if @concurrency&.dynamic?
-        return true if @threshold&.dynamic?
+        return true if @concurrency.dynamic?
+        return true if @threshold.dynamic?
 
         false
       end
@@ -171,7 +171,7 @@ module Sidekiq
       end
 
       def finalize!(jid, *job_args)
-        @concurrency&.finalize!(jid, *job_args)
+        @concurrency.finalize!(jid, *job_args)
       end
 
       def resolved_requeue_with(*job_args)
@@ -180,8 +180,8 @@ module Sidekiq
 
       def retry_in(jid, *job_args)
         intervals = [
-          @concurrency&.retry_in(jid, *job_args),
-          @threshold&.retry_in(*job_args)
+          @concurrency.retry_in(jid, *job_args),
+          @threshold.retry_in(*job_args)
         ].compact
 
         raise "Cannot compute a valid retry interval" if intervals.empty?
@@ -192,8 +192,8 @@ module Sidekiq
       end
 
       def reset!
-        @concurrency&.reset!
-        @threshold&.reset!
+        @concurrency.reset!
+        @threshold.reset!
       end
 
       private

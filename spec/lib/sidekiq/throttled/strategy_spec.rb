@@ -80,6 +80,17 @@ RSpec.describe Sidekiq::Throttled::Strategy do
 
     let(:job_args) { [] }
 
+    context "when every dynamic limit is disabled for the job" do
+      let(:options) do
+        {
+          concurrency: { limit: ->(*) {} },
+          threshold:   { limit: ->(*) {}, period: 10 }
+        }
+      end
+
+      it { is_expected.to be false }
+    end
+
     context "when threshold constraints given" do
       let(:options) { threshold }
 

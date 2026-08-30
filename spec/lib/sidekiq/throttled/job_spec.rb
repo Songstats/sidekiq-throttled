@@ -98,5 +98,17 @@ RSpec.describe Sidekiq::Throttled::Job do
 
       working_class.sidekiq_throttle_as "foobar"
     end
+
+    it "requires at least one strategy" do
+      expect { working_class.sidekiq_throttle_as }.to raise_error(
+        ArgumentError, "No throttling strategy provided"
+      )
+    end
+
+    it "rejects strategies that are not registered" do
+      expect { working_class.sidekiq_throttle_as "missing" }.to raise_error(
+        "Strategy not found: missing"
+      )
+    end
   end
 end
